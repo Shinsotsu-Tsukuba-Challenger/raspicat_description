@@ -6,23 +6,23 @@
 
   <!-- =============== Xacro arg =============== -->
   <xacro:arg name="gazebo_plugin"         default="true"/>
-  <xacro:arg name="camera_gazebo_plugin"  default="true"/>
+  <xacro:arg name="camera_gazebo_plugin"  default="false"/>
   <xacro:arg name="imu_gazebo_plugin"     default="true"/>
 
   <xacro:arg name="diffdrive_pub_tf"      default="true"/>
   <xacro:arg name="jointstate"            default="true"/>
 
   <xacro:arg name="laser_visual"          default="false"/>
-  <xacro:arg name="ultrasonic_visual"     default="true"/>
+  <xacro:arg name="ultrasonic_visual"     default="false"/>
 
   <xacro:arg name="robot_namespace"       default=""/>
   <xacro:arg name="diffdrive_namespace"   default="/"/>
 
-  <xacro:arg name="lidar_frame"           default="lidar_link"/>
+  <xacro:arg name="lidar_frame"           default="livox_frame"/>
 
   <!-- =============== Xacro property =============== -->
-  <xacro:property name="lidar_mount_z" value="0.0"/>
-  <xacro:property name="lidar_sensor_z" value="0.055"/>
+  <xacro:property name="lidar_mount_z" value="0.7"/>
+  <xacro:property name="lidar_sensor_z" value="0.047"/>
 
   <!-- =============== Xacro include =============== -->
   <xacro:include filename="$(find raspicat_description)/urdf/common.xacro"/>
@@ -66,7 +66,7 @@
 
   <!-- Sensors -->
   <xacro:lidar_mount prefix="lidar_mount" parent="base_link">
-    <origin xyz="0.144 0 ${lidar_mount_z - 0.0262}" rpy="0 0 0"/>
+    <origin xyz="-0.365 0 ${lidar_mount_z - 0.0262}" rpy="${M_PI} 0 0"/>
   </xacro:lidar_mount>
 
   <xacro:lidar_sensor prefix="laser" parent="lidar_mount_link" lidar_frame="$(arg lidar_frame)">
@@ -117,7 +117,7 @@
 
     <!-- Sensors -->
     <xacro:lidar_gazebo lidar_frame="$(arg lidar_frame)"
-      min_angle="-1.9" max_angle="1.9" min_range="0.1" max_range="30" visualize="$(arg laser_visual)"/>
+      min_angle="-1.9" max_angle="1.9" min_range="0.1" max_range="80" visualize="$(arg laser_visual)"/>
 
     <xacro:ultrasonic_sensor_gazebo prefix="right_side"
       min_angle="-0.0574533" max_angle="0.0574533" min_range="0.02" max_range="4.095" visualize="$(arg ultrasonic_visual)"/>

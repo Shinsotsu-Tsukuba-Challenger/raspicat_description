@@ -2,6 +2,10 @@
 <robot name="raspicat_lidar_sensor" xmlns:xacro="http://ros.org/wiki/xacro">
   <xacro:include filename="$(find raspicat_description)/urdf/sensors/lidar.gazebo.xacro"/>
 
+  <material name="gray">
+    <color rgba="0.5 0.5 0.5 1.0"/>
+  </material>
+
   <xacro:macro name="lidar_mount" params="prefix parent *joint_origin">
     <joint name="${prefix}_joint" type="fixed">
       <xacro:insert_block name="joint_origin"/>
@@ -17,6 +21,14 @@
       <parent link="${parent}"/>
       <child link="${lidar_frame}"/>
     </joint>
-    <link name="${lidar_frame}"/>
+    <link name="${lidar_frame}">
+      <visual>
+        <origin xyz="0 0 0" rpy="${M_PI/2} 0 0"/>
+        <geometry>
+          <mesh filename="package://raspicat_description/meshes/stl/sensors/mid-360.stl" scale="0.001 0.001 0.001"/>
+        </geometry>
+        <material name="gray"/>
+      </visual>
+    </link>
   </xacro:macro>
 </robot>
