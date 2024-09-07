@@ -10,13 +10,13 @@
         <ray>
           <scan>
             <horizontal>
-              <samples>100</samples>
+              <samples>360</samples>
               <resolution>1</resolution>
               <min_angle>${M_PI}</min_angle>
               <max_angle>-${M_PI}</max_angle>
             </horizontal>
             <vertical>
-              <samples>50</samples>
+              <samples>10</samples>
               <resolution>1</resolution>
               <min_angle>-0.1221730476396</min_angle>
               <max_angle>0.90757121103706</max_angle>
